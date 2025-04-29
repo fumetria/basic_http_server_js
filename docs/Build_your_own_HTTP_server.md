@@ -245,13 +245,15 @@ In this stage, you'll add support for gzip compression to your HTTP server.
 
 ### Tests
 The tester will execute your program like this:
-
+```sh
 $ ./your_program.sh
+```
 Then, the tester will send a GET request to the /echo/{str} endpoint on your server. The request will contain an Accept-Encoding header that includes gzip.
-
+```sh
 $ curl -v -H "Accept-Encoding: gzip" http://localhost:4221/echo/abc | hexdump -C
+```
 Your server's response must contain the following:
-
+```sh
 200 response code.
 Content-Type header set to text/plain.
 Content-Encoding header set to gzip.
@@ -265,6 +267,7 @@ Content-Length: 23
 1F 8B 08 00 00 00 00 00  // Hexadecimal representation of the response body
 00 03 4B 4C 4A 06 00 C2
 41 24 35 03 00 00 00
+```
 
 #### Notes
 - To check that your compressed body is correct, you can run echo -n <uncompressed-str> | gzip | hexdump -C.
